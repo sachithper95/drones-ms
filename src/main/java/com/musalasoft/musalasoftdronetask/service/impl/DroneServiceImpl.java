@@ -4,7 +4,6 @@ import com.musalasoft.musalasoftdronetask.dto.DroneDto;
 import com.musalasoft.musalasoftdronetask.enums.DroneModel;
 import com.musalasoft.musalasoftdronetask.enums.DroneState;
 import com.musalasoft.musalasoftdronetask.exception.DroneClientException;
-import com.musalasoft.musalasoftdronetask.exception.DroneNotFoundException;
 import com.musalasoft.musalasoftdronetask.exception.ExceptionEnum;
 import com.musalasoft.musalasoftdronetask.model.Drone;
 import com.musalasoft.musalasoftdronetask.repository.DroneRepository;
@@ -13,9 +12,9 @@ import com.musalasoft.musalasoftdronetask.util.Constants;
 import com.musalasoft.musalasoftdronetask.util.ErrorHandler;
 import lombok.AllArgsConstructor;
 import org.apache.commons.collections4.IterableUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,5 +70,14 @@ public class DroneServiceImpl implements DroneService {
         drone.setDroneState(DroneState.IDLE);
 
         return droneRepository.save(drone);
+    }
+
+    @Override
+    public List<Drone> getAllAvailableDronesForLoading() throws DroneClientException {
+        Optional<List<Drone>> availableDronesForLoading = droneRepository.getAvailableDronesForLoading();
+        if(availableDronesForLoading.isPresent()){
+            return availableDronesForLoading.get();
+        }
+        return Collections.emptyList();
     }
 }

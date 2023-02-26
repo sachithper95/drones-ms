@@ -14,4 +14,7 @@ public interface DroneService {
     Drone getDroneBySerialNumber(String serialNumber) throws DroneClientException;
 
     Drone registerDrone(DroneDto droneDto) throws DroneClientException;
+
+    List<Drone> getAllAvailableDronesForLoading() throws DroneClientException;
+
 }

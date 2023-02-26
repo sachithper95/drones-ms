@@ -2,7 +2,6 @@ package com.musalasoft.musalasoftdronetask.controller;
 
 import com.musalasoft.musalasoftdronetask.dto.DroneDto;
 import com.musalasoft.musalasoftdronetask.exception.DroneClientException;
-import com.musalasoft.musalasoftdronetask.exception.DroneNotFoundException;
 import com.musalasoft.musalasoftdronetask.model.Drone;
 import com.musalasoft.musalasoftdronetask.service.DroneService;
 import com.musalasoft.musalasoftdronetask.util.ErrorHandler;
@@ -43,4 +42,14 @@ public class DroneController {
             return ErrorHandler.handleClientError(ex);
         }
     }
+
+    @GetMapping(path = "/loading-availability")
+    public ResponseEntity<Object> getAllAvailableDronesForLoading(){
+        try{
+            return ResponseEntity.ok(droneService.getAllAvailableDronesForLoading());
+        } catch (DroneClientException ex) {
+            return ErrorHandler.handleClientError(ex);
+        }
+    }
+
 }
