@@ -1,6 +1,7 @@
 package com.musalasoft.musalasoftdronetask.controller;
 
 
+import com.musalasoft.musalasoftdronetask.dto.BatteryPercentageDto;
 import com.musalasoft.musalasoftdronetask.enums.DroneModel;
 import com.musalasoft.musalasoftdronetask.enums.DroneState;
 import com.musalasoft.musalasoftdronetask.model.Drone;
@@ -53,4 +54,27 @@ public class DroneControllerTest {
         when(droneService.getDroneList()).thenReturn(this.droneList);
         mockMvc.perform(get("/drone-api/v1/drone")).andExpect(status().isOk());
     }
+    @Test
+    void testGetDroneBySerialNumber() throws Exception {
+        Drone drone = new Drone();
+        drone.setId(1L);
+        drone.setDroneModel(DroneModel.LIGHTWEIGHT);
+        drone.setDroneState(DroneState.DELIVERED);
+        drone.setBatteryPercentage(50);
+        drone.setSerialNumber("D360");
+        drone.setWeightLimit(100);
+
+        when(droneService.getDroneBySerialNumber("D360")).thenReturn(drone);
+        mockMvc.perform(get("/drone-api/v1/drone/D360")).andExpect(status().isOk());
+    }
+
+    @Test
+    void testGetBatteryPercentageByDroneSerialNumber() throws Exception {
+        BatteryPercentageDto batteryPercentageDto = new BatteryPercentageDto();
+        batteryPercentageDto.setBatteryPercentage(60);
+        batteryPercentageDto.setSerialNumber("D360");
+        when(droneService.getBatteryPercentageBySerialNumber("D360")).thenReturn(batteryPercentageDto);
+        mockMvc.perform(get("/drone-api/v1/drone/battery/D360")).andExpect(status().isOk());
+    }
+
 }
