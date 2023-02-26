@@ -75,24 +75,24 @@ public class DroneController {
     public ResponseEntity<Object> addMedication(@RequestPart("file") MultipartFile file,
                                                 @RequestPart("medication") String medication) throws IOException {
 
-        try{
-            if(file == null){
+        try {
+            if (file == null) {
                 ErrorHandler.handleClientError(ErrorHandler.handleException(ExceptionEnum.INVALID_IMAGE_FILE_ERROR));
             }
             Byte[] img = ArrayUtils.toObject(file.getBytes());
             ObjectMapper objectMapper = new ObjectMapper();
             MedicationDto medicationDto = objectMapper.readValue(medication, MedicationDto.class);
-            return ResponseEntity.ok(medicationService.addMedication(medicationDto,img));
-        }catch(DroneClientException ex){
+            return ResponseEntity.ok(medicationService.addMedication(medicationDto, img));
+        } catch (DroneClientException ex) {
             return ErrorHandler.handleClientError(ex);
         }
     }
 
     @GetMapping("/medications/{serialNumber}")
-    public ResponseEntity<Object> getMedicationsByDroneSerial(@PathVariable String serialNumber){
-        try{
+    public ResponseEntity<Object> getMedicationsByDroneSerial(@PathVariable String serialNumber) {
+        try {
             return ResponseEntity.ok(droneService.getMedicationsByDroneSerial(serialNumber));
-        }catch(DroneClientException ex){
+        } catch (DroneClientException ex) {
             return ErrorHandler.handleClientError(ex);
         }
     }

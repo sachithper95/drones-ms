@@ -9,14 +9,13 @@ import org.springframework.http.ResponseEntity;
 
 public class ErrorHandler {
     public static ResponseEntity<Object> handleClientError(DroneClientException e) {
-
-        if(e.getCode() == ExceptionEnum.DRONE_NOT_FOUND.getErrorCode()){
-            return new ResponseEntity<>(new ErrorDto(e.getCode(),e.getMessage()), HttpStatus.BAD_REQUEST);
+        if (e.getCode() == ExceptionEnum.DRONE_NOT_FOUND.getErrorCode()) {
+            return new ResponseEntity<>(new ErrorDto(e.getCode(), e.getMessage()), HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(new ErrorDto(e.getCode(),e.getMessage()), HttpStatus.BAD_REQUEST);
-
+        return new ResponseEntity<>(new ErrorDto(e.getCode(), e.getMessage()), HttpStatus.BAD_REQUEST);
     }
-    public static DroneClientException handleException(ExceptionEnum exceptionEnum){
-        return new DroneClientException(exceptionEnum.getErrorMessage(),exceptionEnum.getErrorCode());
+
+    public static DroneClientException handleException(ExceptionEnum exceptionEnum) {
+        return new DroneClientException(exceptionEnum.getErrorMessage(), exceptionEnum.getErrorCode());
     }
 }

@@ -1,6 +1,6 @@
 package com.musalasoft.musalasoftdronetask.exception;
 
-public class DroneException extends Exception{
+public class DroneException extends Exception {
     private int code;
     private String description;
 
@@ -14,13 +14,13 @@ public class DroneException extends Exception{
         this.code = code;
     }
 
-    public DroneException(String message, String description, int code){
+    public DroneException(String message, String description, int code) {
         super(message);
         this.code = code;
         this.description = description;
     }
 
-    public DroneException(String message, String description, int errorCode, Throwable cause){
+    public DroneException(String message, String description, int errorCode, Throwable cause) {
         super(message, cause);
         this.code = errorCode;
         this.description = description;

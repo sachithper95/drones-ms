@@ -4,9 +4,12 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+/**
+ * Medication model.
+ */
 @Entity
 @Data
-@Table(name = "medications")
+@Table(name = "medication")
 public class Medication {
 
     @Id
@@ -26,6 +29,7 @@ public class Medication {
     @Lob
     @Column(name = "img")
     private Byte[] image;
+
     @ManyToOne()
     private Drone drone;
 }

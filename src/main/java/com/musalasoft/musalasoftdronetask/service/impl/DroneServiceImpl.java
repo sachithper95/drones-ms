@@ -77,7 +77,7 @@ public class DroneServiceImpl implements DroneService {
     @Override
     public List<Drone> getAllAvailableDronesForLoading() throws DroneClientException {
         Optional<List<Drone>> availableDronesForLoading = droneRepository.getAvailableDronesForLoading();
-        if(availableDronesForLoading.isPresent()){
+        if (availableDronesForLoading.isPresent()) {
             return availableDronesForLoading.get();
         }
         return Collections.emptyList();
@@ -86,7 +86,7 @@ public class DroneServiceImpl implements DroneService {
     @Override
     public BatteryPercentageDto getBatteryPercentageBySerialNumber(String serialNumber) throws DroneClientException {
         Optional<Drone> opt = droneRepository.findBySerialNumber(serialNumber);
-        if(opt.isPresent()){
+        if (opt.isPresent()) {
             BatteryPercentageDto batteryPercentageDto = new BatteryPercentageDto();
             Drone drone = opt.get();
             batteryPercentageDto.setSerialNumber(drone.getSerialNumber());
@@ -99,7 +99,7 @@ public class DroneServiceImpl implements DroneService {
     @Override
     public List<Medication> getMedicationsByDroneSerial(String serialNumber) throws DroneClientException {
         Optional<Drone> bySerialNumber = droneRepository.findBySerialNumber(serialNumber);
-        if(bySerialNumber.isPresent()){
+        if (bySerialNumber.isPresent()) {
             Drone drone = bySerialNumber.get();
             return drone.getMedicationList();
         }

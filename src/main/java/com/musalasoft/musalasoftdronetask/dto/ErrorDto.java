@@ -3,6 +3,9 @@ package com.musalasoft.musalasoftdronetask.dto;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+/**
+ * DTO for Error data.
+ */
 @Data
 @Component
 public class ErrorDto {
@@ -13,7 +16,6 @@ public class ErrorDto {
     public ErrorDto(){
 
     }
-
     public ErrorDto(int code,String message){
         this.code = code;
         this.message = message;

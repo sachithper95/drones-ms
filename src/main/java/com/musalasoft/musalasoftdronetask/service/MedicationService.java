@@ -6,5 +6,12 @@ import com.musalasoft.musalasoftdronetask.model.Medication;
 
 public interface MedicationService {
 
-    Medication addMedication(MedicationDto medicationDto, Byte[] img)throws DroneClientException;
+    /**
+     * Add medication.
+     *
+     * @param medicationDto The MedicationDTO.
+     * @return A Medication Object.
+     * @throws DroneClientException Throws an exception if an error occurs while adding a medication.
+     */
+    Medication addMedication(MedicationDto medicationDto, Byte[] img) throws DroneClientException;
 }

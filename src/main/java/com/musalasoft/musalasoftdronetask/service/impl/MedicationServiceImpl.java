@@ -69,7 +69,7 @@ public class MedicationServiceImpl implements MedicationService {
         droneRepository.save(drone);
 
         Medication medication = new Medication();
-        BeanUtils.copyProperties(medicationDto,medication);
+        BeanUtils.copyProperties(medicationDto, medication);
         medication.setImage(img);
         medication.setDrone(drone);
         medicationRepository.save(medication);

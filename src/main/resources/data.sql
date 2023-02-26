@@ -6,4 +6,4 @@ INSERT INTO drone (serial_number, model, maximum_weight, battery_percentage, sta
 INSERT INTO drone (serial_number, model, maximum_weight, battery_percentage, state) VALUES ( 'D1500', 'LIGHTWEIGHT', 200, 60, 'DELIVERING');
 
 --!medication table insert queries
-INSERT INTO medications (name, weight, code, img) VALUES ('covex', 100, 'MED001', 'abcnhy438r9akjuwe7qoklf565gshcbnx65maswutjfkslde725dgj73hkdksk');
+INSERT INTO medication (name, weight, code, img) VALUES ('covex', 100, 'MED001', 'abcnhy438r9akjuwe7qoklf565gshcbnx65maswutjfkslde725dgj73hkdksk');

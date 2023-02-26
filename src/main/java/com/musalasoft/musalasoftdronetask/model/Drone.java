@@ -12,6 +12,9 @@ import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+/**
+ * Drone model.
+ */
 @Data
 @Entity
 @Table(name = "drone")
