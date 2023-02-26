@@ -42,7 +42,7 @@ public class DroneControllerTest {
         drone.setId(1L);
         drone.setDroneModel(DroneModel.LIGHTWEIGHT);
         drone.setDroneState(DroneState.DELIVERED);
-        drone.setBatterPercentage(50);
+        drone.setBatteryPercentage(50);
         drone.setSerialNumber("D360");
         drone.setWeightLimit(100);
         droneList.add(drone);

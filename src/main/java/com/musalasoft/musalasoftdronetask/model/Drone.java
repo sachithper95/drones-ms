@@ -8,6 +8,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
@@ -31,10 +33,13 @@ public class Drone {
 
     @JsonProperty("battery")
     @Column(name = "battery_percentage")
-    private int batterPercentage;
+    private int batteryPercentage;
 
     @JsonProperty("state")
     @Enumerated(EnumType.STRING)
     @Column(name = "state")
     private DroneState droneState;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "drone")
+    private List<Medication> medicationList;
 }

@@ -1,11 +1,13 @@
 package com.musalasoft.musalasoftdronetask.service.impl;
 
+import com.musalasoft.musalasoftdronetask.dto.BatteryPercentageDto;
 import com.musalasoft.musalasoftdronetask.dto.DroneDto;
 import com.musalasoft.musalasoftdronetask.enums.DroneModel;
 import com.musalasoft.musalasoftdronetask.enums.DroneState;
 import com.musalasoft.musalasoftdronetask.exception.DroneClientException;
 import com.musalasoft.musalasoftdronetask.exception.ExceptionEnum;
 import com.musalasoft.musalasoftdronetask.model.Drone;
+import com.musalasoft.musalasoftdronetask.model.Medication;
 import com.musalasoft.musalasoftdronetask.repository.DroneRepository;
 import com.musalasoft.musalasoftdronetask.service.DroneService;
 import com.musalasoft.musalasoftdronetask.util.Constants;
@@ -66,7 +68,7 @@ public class DroneServiceImpl implements DroneService {
         drone.setSerialNumber(droneDto.getSerialNumber());
         drone.setDroneModel(DroneModel.valueOf(droneDto.getModel().toUpperCase()));
         drone.setWeightLimit(droneDto.getMaximumWeight());
-        drone.setBatterPercentage(droneDto.getBatteryPercentage());
+        drone.setBatteryPercentage(droneDto.getBatteryPercentage());
         drone.setDroneState(DroneState.IDLE);
 
         return droneRepository.save(drone);
@@ -79,5 +81,28 @@ public class DroneServiceImpl implements DroneService {
             return availableDronesForLoading.get();
         }
         return Collections.emptyList();
+    }
+
+    @Override
+    public BatteryPercentageDto getBatteryPercentageBySerialNumber(String serialNumber) throws DroneClientException {
+        Optional<Drone> opt = droneRepository.findBySerialNumber(serialNumber);
+        if(opt.isPresent()){
+            BatteryPercentageDto batteryPercentageDto = new BatteryPercentageDto();
+            Drone drone = opt.get();
+            batteryPercentageDto.setSerialNumber(drone.getSerialNumber());
+            batteryPercentageDto.setBatteryPercentage(drone.getBatteryPercentage());
+            return batteryPercentageDto;
+        }
+        throw ErrorHandler.handleException(ExceptionEnum.DRONE_NOT_FOUND);
+    }
+
+    @Override
+    public List<Medication> getMedicationsByDroneSerial(String serialNumber) throws DroneClientException {
+        Optional<Drone> bySerialNumber = droneRepository.findBySerialNumber(serialNumber);
+        if(bySerialNumber.isPresent()){
+            Drone drone = bySerialNumber.get();
+            return drone.getMedicationList();
+        }
+        throw ErrorHandler.handleException(ExceptionEnum.SERIAL_NUMBER_NOT_EXISTS);
     }
 }
