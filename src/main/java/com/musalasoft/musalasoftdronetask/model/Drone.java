@@ -3,6 +3,7 @@ package com.musalasoft.musalasoftdronetask.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.musalasoft.musalasoftdronetask.enums.DroneModel;
 import com.musalasoft.musalasoftdronetask.enums.DroneState;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
